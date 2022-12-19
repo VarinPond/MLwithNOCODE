@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", helvetica, arial, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            background-color: #0093E9;
+            background-image: linear-gradient(90deg, #0093E9 0%, #80D0C7 100%);
+        }
+        .clean_in input[type=float] {
+            background-color:rgba(0, 0, 0, 0);
+            border-color:rgba(0, 0, 0, 0);
+            border-width:0.1;
+            height: 100%;
+        }
+        .table-fill {
+            background: white;
+            border-radius:3px;
+            border-collapse: collapse;
+            height: 320px;
+            margin: auto;
+            max-width: 1000px;
+            padding:5px;
+            width: 100%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            animation: float 5s infinite;
+        }
+        td {
+            background:#FFFFFF;
+            padding:10px;
+            text-align:left;
+            vertical-align:left;
+            font-weight:300;
+            font-size:18px;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #C1C3D1;
+        }
+        tr {
+            border-top: 1px solid #C1C3D1;
+            border-bottom: 1px solid #C1C3D1;
+            color:#666B85;
+            font-size:16px;
+            font-weight:normal;
+            text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+        }
+        tr:nth-child(odd) td {
+            background:#EBEBEB;
+        }
+        
+        th {
+            color:#D5DDE5;;
+            background:#1b1e24;
+            border-bottom:4px solid #9ea7af;
+            border-right: 1px solid #343a45;
+            font-size:23px;
+            font-weight: 100;
+            padding:15px;
+            text-align:left;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            vertical-align:middle;
+        }
+
+        th:first-child {
+            border-top-left-radius:3px;
+        }
+        
+        th:last-child {
+            border-top-right-radius:3px;
+            border-right:none;
+        }
+        .navbar {
+            display: flex;
+            background-color: rgb(36, 36, 36);
+            color: black;
+            justify-content: center;
+            align-items: center;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .logo {
+            text-align: left;
+            color: rgb(255, 255, 255);
+            margin: 0 4rem;
+        }
+        .title {
+            width: 100%;
+        }
+
+        .title h2 {
+            text-align: right;
+            color: rgb(255, 255, 255);  
+        }
+
+        .menu {
+            width: 25%;
+            display: flex;
+            justify-content: right;
+            align-items: right;
+        }
+
+        .menu button {
+            border: none;
+            margin: 0 1rem;
+            background-color: rgb(77, 77, 77);
+        }
+
+        .menu a {
+            border: none;
+            color: rgb(255, 255, 255);
+            padding: 10px 10px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        .previous {
+            background-color: #f1f1f1;
+            color: black;
+            font-size:40px;
+            text-decoration:none;
+            padding: 10px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit page</title>
+</head>
+<body>
+    <section class="navbar">
+        <a href="../../../table/{{table_id}}" class="previous"> &nbsp;&laquo;&nbsp; </a>
+        <div class="logo">
+            <h1>YouCanMachine</h1>
+        </div>
+        <div class="title">
+            <h2>Welcome, {{user.username}}.</h2>
+        </div>
+        <div class="menu">
+            <button><a href="../logout/">Log out</a></button>
+        </div>
+    </section>
+    
+    <form action="submit_edit/" method="post">
+    {% csrf_token %}
+    <script>
+        let fe = '{{number_fe}}'
+    </script>
+    <br>
+
+    <table border="1" class="table-fill" align="left">
+        <tr>
+            <th>NO.</th>
+            <script>
+                for (let i = 1; i <= fe; i++) {
+                    document.write('<th>Input '+i.toString()+'</th>')
+                }
+            </script>
+            <th>Output</th>
+            <script>
+                let c = 0;
+                document.getElementById("c").value = c;
+            </script>
+            {%for i in mymember%}
+                <tr>
+                    <td>
+                    <script>
+                        document.write(c);
+                    </script>
+                    
+                    </td>
+                    
+                    <script>
+                        a=''
+                        if (fe>=2){
+                            a+='<td><div class="clean_in"><input type="float" name="x1_'+ c.toString() +'" value={{i.x1}}></div></td><td><div class="clean_in"><input type="float" name="x2_'+ c.toString() +'" value={{i.x2}}></div></td>';
+                        }
+                        if (fe>=3){
+                            a+='<td><div class="clean_in"><input type="float" name="x3_'+ c.toString() +'" value={{i.x3}}></div></td>';
+                        }
+                        if (fe>=4){
+                            a+='<td><div class="clean_in"><input type="float" name="x4_'+ c.toString() +'" value={{i.x4}}></div></td>';
+                        }
+                        if (fe>=5){
+                            a+='<td><div class="clean_in"><input type="float" name="x5_'+ c.toString() +'" value={{i.x5}}></div></td>';
+                        }
+                        if (fe>=6){
+                            a+='<td><div class="clean_in"><input type="float" name="x6_'+ c.toString() +'" value={{i.x6}}></div></td>';
+                        }
+                        a+='<td><div class="clean_in"><input type="float" name="y_'+ c.toString() +'" value={{i.y}}></div></td>'
+                        
+                        document.write(a);
+                        c+=1;
+                    </script>
+                </tr>
+            {%endfor%}
+    </table>
+    <input type="submit" value="Submit    ">
+    </form>
+
+    
+</body>
+</html>

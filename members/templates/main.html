@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #0093E9;
+        background-image: linear-gradient(90deg, #0093E9 0%, #80D0C7 100%);
+    }
+
+    .navbar {
+        display: flex;
+        background-color: rgb(36, 36, 36);
+        color: black;
+        justify-content: center;
+        align-items: center;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
+    .logo {
+        text-align: left;
+        color: rgb(255, 255, 255);
+        margin: 0 4rem;
+    }
+
+    .menu {
+        width: 25%;
+        display: flex;
+        justify-content: right;
+        align-items: right;
+    }
+
+    .menu button {
+        border: none;
+        margin: 0 1rem;
+        background-color: rgb(77, 77, 77);
+    }
+
+    .menu a {
+        border: none;
+        color: rgb(255, 255, 255);
+        padding: 10px 10px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0 1rem;
+        text-decoration: none;
+    }
+
+    .title {
+        width: 100%;
+    }
+
+    .title h2 {
+        text-align: right;
+        color: rgb(255, 255, 255);  
+    }
+
+    #outer {
+        width: 100%;
+        text-align: center;
+    }
+
+    .inner {
+        display: inline-block;
+    }
+
+    .button {
+        background-color: #f44336;
+        cursor: pointer;
+    }
+
+    .teams {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+        padding-left: 100px;
+        padding-right: 100px; 
+    }
+    .teams a{
+        text-decoration:none;
+        color: rgb(0, 0, 0);
+
+    }
+
+    .teams-items {
+        padding: 1rem;
+        border-radius: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+    }
+
+    .teams-items h3 {
+        line-height: 0px;
+    }
+
+    .delete input[type=submit] {
+        line-height: 12px;
+        font-family: tahoma;
+        margin-top: 1px;
+        margin-right: 2px;
+        position: initial;
+        top:0;
+        right:0;
+    }
+
+    /* Red */
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+</head>
+
+<body style=>
+    <section class="navbar">
+        <div class="logo">
+            <h1>YouCanMachine</h1>
+        </div>
+        <div class="title">
+            <h2>Welcome, {{user.username}}.</h2>
+        </div>
+        
+        <div class="menu">
+            <button><a href="../logout/">Log out</a></button>
+        </div>
+    </section>
+
+
+    
+
+    <script>
+        let t;
+        let id;
+        var a = "{{ number_table }}";
+        const table = []
+        const table_id = []
+        {% for i in table_name %}
+        table.push('{{i.table_name}}')
+        table_id.push('{{i.table_id}}')
+        {% endfor %}
+        table_='<section class="teams">'
+        for (let i = 0; i < a; i++) {
+            id = i + 1
+            // document.write(delete_)
+            table_ += '<a href=../table/' + table_id[i] + ' ><div class="teams-items"><h3>'+table[i]+'</h3><div class="delete"><form action="../../../../main/delete/' + table_id[i].toString() + '" method="post">{% csrf_token %}<input type="submit" class="button" value="X"></form></div></div></a>';
+            
+        }
+        document.write(table_)
+    </script>
+        <div class="teams-items">
+            <form action="add/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h3>Create Table</h3>
+                <label>Table name: </label>
+                <input type="text" name="table_name" value="Untitled">
+                <label>Feature: </label>
+                <select id="table" name="table">
+                    <option value="0">Default</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <br>
+                <br>
+                <input type="file" name="myfile"/>
+
+                <button type="submit" value="submit">Create</button>
+            </form>
+        </div>
+
+
+    </section>
+
+</body>
+
+</html>

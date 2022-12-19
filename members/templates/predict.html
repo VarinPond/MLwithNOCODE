@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .display {
+        padding: 20px;
+        border-radius: 30px;
+        margin: auto;
+        margin-top: 100px;
+        width: 500px;
+        height: 500px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <body style="background-color:powderblue;">
+        <section class="display">
+            <div class="text">
+                <h1>Predicted values is: {{predict}}</h1>
+                <h4>losses values is: {{loss}}</h4>
+                <br>
+                <form>
+                    <input type="button" value="Go back!" onclick="history.back()">
+                </form>
+            </div>
+        </section>
+
+    </body>
+
+</html>
