@@ -1,4 +1,3 @@
-"# MLwithNOCODE" 
 This project is KMUTT project in the DATABASE SYSTEMS course
 This website is Machine Learning without Coding
 This website can create Neural Networks Mode without coding. that you can only import data then you can get model. You can predict and download model .JS for use other website
